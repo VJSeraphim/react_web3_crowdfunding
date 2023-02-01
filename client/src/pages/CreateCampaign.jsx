@@ -5,10 +5,12 @@ import { ethers } from 'ethers'
 import { money } from '../assets'
 import { CustomButton, FormField } from '../components'
 import { checkIfImage } from '../utils'
+import { useStateContext } from '../context'
 
 const CreateCampaign = () => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
+  const { createCampaign } = useStateContext()
   const [form, setForm] = useState({
     name: '',
     title: '',
