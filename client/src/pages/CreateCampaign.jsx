@@ -24,9 +24,22 @@ const CreateCampaign = () => {
     setForm({ ...form, [fieldName] : e.target.value})
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
+    checkIfImage(form.image, async(exists) => {
+      if(exists) {
+        setIsLoading(true)
+        await createCampaign({ ...form, target: ethers.utils.parseUnits(form.target, 18)})
+        setIsLoading(false)
+        navigate('/')
+      } else {
+        alert('Invalid Image Url Provided.')
+        setForm({ ...form, image: '' })
+      }
+    })
+
+    
     console.log(form)
   }
 
